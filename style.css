@@ -86,3 +86,92 @@
   .opening *, .opening .envelope-button, .opening .envelope-button:not(:disabled),
   .opening .envelope-button:not(:disabled) .wax-seal {animation: none !important;}
 }
+
+
+/* V3: guaranteed first-screen visibility and staged cinematic entrance */
+[hidden] { display: none !important; }
+.opening:not([hidden]) { display:flex !important; opacity:1; visibility:visible; }
+.opening { position:relative; z-index:5; min-height:100svh; padding:clamp(35px,5vh,60px) 20px; justify-content:center; gap:0; }
+.opening h1 { margin:8px auto 0; opacity:1; }
+.opening h1 em {font-size:clamp(50px,7.4vw,86px); margin:6px 0 0;}
+.opening-message { font-style:italic; font-size:clamp(18px,2vw,24px); margin:0 0 4px; color:#4a5f6c; }
+.opening-instruction { margin:12px 0 10px; }
+.opening .envelope-button {width:min(440px,76vw); padding:16px 8px 4px;}
+.opening .tiny {margin-top:10px;}
+/* Stagger each item, but NEVER depend on JavaScript to make it visible. */
+.opening .first-intro {animation:letterAppear .8s .08s ease-out backwards;}
+.opening h1 {animation:letterAppear 1.15s .35s ease-out backwards;}
+.opening .opening-divider {animation:letterAppear .8s .8s ease-out backwards;}
+.opening .opening-message {animation:letterAppear .8s 1.05s ease-out backwards;}
+.opening .envelope-button:not(:disabled) {animation:envelopeEnter 1.1s 1.3s ease-out backwards, envelopeFloat 4s 2.4s ease-in-out infinite;}
+.opening .opening-instruction {animation:letterAppear .9s 1.9s ease-out backwards;}
+.opening .tiny {animation:letterAppear .8s 2.15s ease-out backwards;}
+@keyframes letterAppear {from {opacity:0;transform:translateY(22px)} to {opacity:1;transform:translateY(0)}}
+@keyframes envelopeEnter {from {opacity:0;transform:translateY(50px) scale(.92)} to {opacity:1;transform:translateY(0) scale(1)}}
+.opening.disappear { animation:fadeAway .6s ease forwards !important; pointer-events:none; }
+/* Reveal on scroll: keep all content visible by default. */
+.invitation-content .hero-photo,.invitation-content .hero-content,.invitation-content .music-card,
+.invitation-content .arch-card,.invitation-content .countdown,
+.invitation-content .details-card,.invitation-content .note-card {transition:opacity .8s ease,transform .8s ease;}
+@media (max-width:720px) {
+ .opening {padding:40px 16px;}
+ .opening h1 em {font-size:clamp(46px,11vw,66px)}
+ .opening .envelope-button {width:min(390px,91vw);padding-top:12px;}
+ .opening-instruction {font-size:19px;}
+}
+@media (prefers-reduced-motion: reduce) {
+ .opening *, .opening .envelope-button:not(:disabled) {animation:none !important;opacity:1 !important;}
+}
+
+
+/* V4 — animated invitation content AFTER opening the envelope.
+   Safe by default: content is always visible even if JavaScript fails. */
+@keyframes interiorSlide {
+  from {opacity:0; transform:translateY(45px) scale(.975); filter:blur(4px)}
+  to {opacity:1; transform:translateY(0) scale(1); filter:blur(0)}
+}
+@keyframes interiorFade {
+  from {opacity:0; transform:translateY(22px)}
+  to {opacity:1; transform:translateY(0)}
+}
+@keyframes imageReveal {
+  from {opacity:.25; transform:scale(1.08); filter:blur(6px)}
+  to {opacity:1; transform:scale(1); filter:blur(0)}
+}
+@keyframes floralPulse {
+  from {opacity:.3; transform:scale(.75) rotate(-8deg)}
+  to {opacity:1; transform:scale(1) rotate(0)}
+}
+/* Observe sections once they enter the screen; play each entrance only once. */
+.invitation-content .hero.is-visible .hero-photo {animation:imageReveal 1.65s ease-out both}
+.invitation-content .hero.is-visible .hero-content > * {animation:interiorFade .85s ease-out both}
+.invitation-content .hero.is-visible .hero-content > :nth-child(1) {animation-delay:.2s}
+.invitation-content .hero.is-visible .hero-content > :nth-child(2) {animation-delay:.45s}
+.invitation-content .hero.is-visible .hero-content > :nth-child(3) {animation-delay:.7s}
+.invitation-content .hero.is-visible .hero-content > :nth-child(n+4) {animation-delay:.9s}
+.invitation-content .music-section.is-visible .music-card,
+.invitation-content .invitation-panel.is-visible .arch-card,
+.invitation-content .countdown-section.is-visible .countdown,
+.invitation-content .details-section.is-visible .details-card,
+.invitation-content .note-section.is-visible .note-card,
+.invitation-content footer.is-visible {animation:interiorSlide 1s cubic-bezier(.2,.75,.2,1) both}
+.invitation-content .invitation-panel.is-visible .arch-inner > *,
+.invitation-content .details-section.is-visible .details-card > * {animation:interiorFade .9s ease-out both}
+.invitation-content .invitation-panel.is-visible .arch-inner > :nth-child(1),
+.invitation-content .details-section.is-visible .details-card > :nth-child(1) {animation-delay:.25s}
+.invitation-content .invitation-panel.is-visible .arch-inner > :nth-child(2),
+.invitation-content .details-section.is-visible .details-card > :nth-child(2) {animation-delay:.4s}
+.invitation-content .invitation-panel.is-visible .arch-inner > :nth-child(3),
+.invitation-content .details-section.is-visible .details-card > :nth-child(3) {animation-delay:.55s}
+.invitation-content .invitation-panel.is-visible .arch-inner > :nth-child(n+4),
+.invitation-content .details-section.is-visible .details-card > :nth-child(n+4) {animation-delay:.7s}
+.invitation-content .countdown-section.is-visible > .smallcaps {animation:interiorFade .8s ease-out both}
+.invitation-content .countdown-section.is-visible > h2 {animation:interiorFade .8s .25s ease-out both}
+.invitation-content .countdown-section.is-visible .countdown > div {animation:interiorFade .75s ease-out both}
+.invitation-content .countdown-section.is-visible .countdown > div:nth-child(1) {animation-delay:.3s}
+.invitation-content .countdown-section.is-visible .countdown > div:nth-child(2) {animation-delay:.45s}
+.invitation-content .countdown-section.is-visible .countdown > div:nth-child(3) {animation-delay:.6s}
+.invitation-content .countdown-section.is-visible .countdown > div:nth-child(4) {animation-delay:.75s}
+@media (prefers-reduced-motion:reduce) {
+  .invitation-content .is-visible, .invitation-content .is-visible * {animation:none!important; filter:none!important}
+}

@@ -3,6 +3,10 @@ const envelope = document.getElementById('envelope');
 const opening = document.getElementById('opening');
 const invitation = document.getElementById('invitationContent');
 let opened = false;
+// Always start on the envelope when a visitor opens the link.
+opening.hidden = false;
+invitation.hidden = true;
+window.scrollTo(0, 0);
 
 openButton.addEventListener('click', () => {
   if (opened) return;
@@ -13,10 +17,11 @@ openButton.addEventListener('click', () => {
   const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 50 : 1650;
   setTimeout(() => {
     invitation.hidden = false;
+    startInteriorAnimations();
     opening.classList.add('disappear');
     setTimeout(() => {
       opening.hidden = true;
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      window.scrollTo(0, 0);
     }, 500);
   }, delay);
 });
@@ -66,3 +71,23 @@ music.addEventListener('timeupdate', () => {
   musicProgress.style.width = duration ? `${music.currentTime / duration * 100}%` : '0%';
   musicTime.textContent = formatTime(music.currentTime);
 });
+
+
+// INTERIOR CINEMATIC ANIMATIONS
+// All invitation content stays visible if JavaScript/IntersectionObserver is unavailable.
+function startInteriorAnimations() {
+  const sections = invitation.querySelectorAll(
+    '.hero, .music-section, .invitation-panel, .countdown-section, .details-section, .note-section, footer'
+  );
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced || !('IntersectionObserver' in window)) return;
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+  sections.forEach(section => observer.observe(section));
+}
