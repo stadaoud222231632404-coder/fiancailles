@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#dce5e8">
+  <meta name="description" content="Invitation aux fiançailles de Lylia et Khireddine, vendredi 13 novembre 2026 à 15h00.">
+  <title>Les fiançailles de Lylia & Khireddine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="fabric fabric-left" aria-hidden="true"></div>
+    <div class="fabric fabric-bottom" aria-hidden="true"></div>
+    <div class="metal-plate" aria-hidden="true">✺</div>
+    <div class="flowers flowers-top" aria-hidden="true">❀ ✿ ❀</div>
+
+    <section class="opening" id="opening" aria-labelledby="opening-title">
+      <p class="smallcaps">UNE INVITATION PRÉCIEUSE</p>
+      <h1 id="opening-title">Les fiançailles de<br><em>Lylia <span>&</span> Khireddine</em></h1>
+      <div class="divider" aria-hidden="true">❧ ❖ ❧</div>
+      <button id="envelopeButton" class="envelope-button" type="button" aria-label="Ouvrir l'enveloppe et découvrir l'invitation" aria-expanded="false" aria-controls="invitationContent">
+        <span class="envelope" id="envelope" aria-hidden="true">
+          <span class="env-back"></span>
+          <span class="env-note">L <span>&</span> K</span>
+          <span class="env-pocket"></span>
+          <span class="env-flap"></span>
+          <span class="env-lace left"></span>
+          <span class="env-lace right"></span>
+          <span class="wax-seal">✺</span>
+        </span>
+      </button>
+      <p class="opening-instruction" id="openingInstruction">Touchez l'enveloppe pour découvrir l'invitation</p>
+      <p class="smallcaps tiny">VENDREDI 13 NOVEMBRE 2026</p>
+    </section>
+
+    <main id="invitationContent" class="invitation-content" hidden>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-photo" role="img" aria-label="Illustration romantique d'un couple de dos, dans une tenue élégante"></div>
+        <div class="hero-content">
+          <p class="smallcaps">UNE PROMESSE D'AMOUR</p>
+          <h2 id="hero-title">Les fiançailles de<br><span>Lylia & Khireddine</span></h2>
+          <div class="divider">❧ ❖ ❧</div>
+          <p>Vendredi 13 novembre 2026</p>
+          <p>À partir de 15h00</p>
+          <p>Salle des fêtes Que Aprovetche</p>
+        </div>
+      </section>
+
+      <section class="music-section" aria-label="Ambiance musicale">
+        <div class="music-card">
+          <div class="music-art" aria-hidden="true">♫</div>
+          <div class="music-details">
+            <p class="smallcaps">NOTRE MÉLODIE</p>
+            <p class="music-title">Un doux moment</p>
+            <p class="music-note">Mélodie originale · facultative</p>
+            <div class="music-controls">
+              <button id="musicToggle" class="music-button" type="button" aria-label="Lancer la musique" aria-pressed="false">▶</button>
+              <div class="progress-wrap"><div id="musicProgress" class="music-progress"></div></div>
+              <span id="musicTime">00:00</span>
+            </div>
+          </div>
+        </div>
+        <audio id="backgroundMusic" src="assets/melodie-originale.mp3" preload="none" loop></audio>
+      </section>
+
+      <section class="invitation-panel" aria-labelledby="card-title">
+        <div class="arch-card">
+          <div class="arch-inner">
+            <span class="arch-ornament">❁</span>
+            <p class="smallcaps">FAIRE-PART DE FIANÇAILLES</p>
+            <h2 id="card-title">Une belle promesse</h2>
+            <div class="divider">❧ ❖ ❧</div>
+            <p class="invitation-copy">C'est avec une immense joie que nous avons le plaisir de vous inviter à partager un moment précieux : la célébration des fiançailles de</p>
+            <p class="names">Lylia <span>&</span> Khireddine</p>
+            <p class="invitation-copy">Deux cœurs, une promesse, une nouvelle histoire qui commence…</p>
+            <div class="divider">❧ ❖ ❧</div>
+            <p class="invitation-copy">Votre présence rendra cette journée encore plus belle.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="countdown-section" aria-labelledby="countdown-title">
+        <p class="smallcaps">UNE DATE À GARDER EN MÉMOIRE</p>
+        <h2 id="countdown-title">Le compte à rebours</h2>
+        <div class="countdown" id="countdown" role="timer" aria-label="Temps restant avant les fiançailles">
+          <div><strong id="days">00</strong><span>Jours</span></div>
+          <div><strong id="hours">00</strong><span>Heures</span></div>
+          <div><strong id="minutes">00</strong><span>Minutes</span></div>
+          <div><strong id="seconds">00</strong><span>Secondes</span></div>
+        </div>
+        <p id="countdownMessage" class="countdown-message"></p>
+      </section>
+
+      <section class="details-section" aria-labelledby="details-title">
+        <div class="details-card">
+          <span class="arch-ornament">❁</span>
+          <p class="smallcaps">CÉLÉBRATION DES FIANÇAILLES</p>
+          <h2 id="details-title">Notre rendez-vous</h2>
+          <div class="divider">❧ ❖ ❧</div>
+          <div class="detail"><span aria-hidden="true">✧</span><p><strong>Vendredi 13 novembre 2026</strong></p></div>
+          <div class="detail"><span aria-hidden="true">◷</span><p>À partir de <strong>15h00</strong></p></div>
+          <div class="detail"><span aria-hidden="true">⌖</span><p><strong>Salle des fêtes Que Aprovetche</strong></p></div>
+          <a class="directions-button" href="https://share.google/ZsGP7tNkf0rsWL1st" target="_blank" rel="noopener noreferrer">Voir l'itinéraire ↗</a>
+        </div>
+      </section>
+
+      <section class="note-section" aria-labelledby="note-title">
+        <div class="note-card">
+          <span class="note-icon" aria-hidden="true">◎</span>
+          <div><h2 id="note-title">Petite note</h2><p>Pour préserver l'intimité de ce moment, nous vous remercions de ne pas prendre de photos.</p></div>
+        </div>
+      </section>
+      <footer><span>Avec amour</span><strong>Lylia & Khireddine</strong><small>13 · 11 · 2026</small></footer>
+    </main>
+  </div>
+</body>
+</html>
