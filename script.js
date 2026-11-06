@@ -16,7 +16,7 @@ openButton.addEventListener('click', () => {
     opening.classList.add('disappear');
     setTimeout(() => {
       opening.hidden = true;
-      invitation.scrollIntoView({ behavior: 'instant', block: 'start' });
+      window.scrollTo({ top: 0, behavior: 'instant' });
     }, 500);
   }, delay);
 });

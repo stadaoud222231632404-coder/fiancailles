@@ -3,3 +3,86 @@
 /* GitHub-ready opening polish */
 .opening { background: radial-gradient(ellipse at 56% 35%, #fffaf0b3, #e7e6e033 70%); }
 @media (min-width: 721px) and (max-height: 800px) { .opening { padding-top: 35px; padding-bottom: 35px; } .opening-instruction { margin: 12px 0 14px; } .opening h1 em { margin: 8px 0 0; } .envelope-button { width: min(430px, 75vw); padding-top: 20px; } }
+
+/* === CINEMATIC FIRST SCREEN & SOFT MOTION === */
+/* Ensure the entrance is always visible and centered, even on a wide screen. */
+.opening {
+  min-height: 100svh;
+  padding: clamp(48px, 7vh, 92px) 24px;
+  background: radial-gradient(ellipse 75% 65% at 50% 50%, #fffdf4e5 0%, #f1f0eb96 58%, #c4d0d338 100%);
+  isolation: isolate;
+}
+.opening::before {
+  content: "";
+  position: absolute;
+  inset: 22px;
+  border: 1px solid #a5a39a90;
+  box-shadow: inset 0 0 0 8px #fffaf133;
+  pointer-events: none;
+  z-index: -1;
+}
+.opening::after {
+  content: "✦";
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  color: #998670;
+}
+.opening h1 { color: #17354c; text-shadow: 0 2px 10px #fffdf4; }
+.opening h1 em { color: #17354c; text-shadow: 0 4px 14px #ffffffaa; }
+.first-intro {color: #395d72; font-weight:700;}
+.opening-instruction { color: #233c4e; }
+.envelope-button {position:relative; z-index:1; margin: 0 auto; transform-origin: 50% 60%;}
+.envelope-button:not(:disabled) {animation: envelopeFloat 3.8s ease-in-out infinite;}
+.envelope-button:not(:disabled):hover {filter: brightness(1.05);}
+.envelope-button:not(:disabled) .wax-seal {animation: sealGlow 2.2s ease-in-out infinite alternate;}
+.envelope-button:disabled {cursor:default;}
+.opening .first-intro {animation: softlyEnter .8s ease both;}
+.opening h1 {animation: softlyEnter 1s .12s ease both;}
+.opening .opening-divider {animation: softlyEnter .9s .25s ease both;}
+.opening .envelope-button {animation: envelopeFloat 3.8s ease-in-out infinite;}
+.opening .opening-instruction {animation: softlyEnter 1s .65s ease both;}
+.opening .tiny {animation: softlyEnter 1s .85s ease both;}
+.envelope.open .env-note {transform:translateY(-72px);}
+.envelope.open .wax-seal {animation:none !important;}
+.envelope.open .env-flap {transform:rotateX(180deg);}
+.envelope-button:disabled, .opening .envelope-button:disabled {animation:none;}
+/* The section is revealed only after the envelope opens. */
+.hero-content {animation: softlyEnter 1.3s .15s ease both;}
+.invitation-content .music-card,
+.invitation-content .arch-card,
+.invitation-content .countdown,
+.invitation-content .details-card,
+.invitation-content .note-card {transition: transform .7s ease, box-shadow .5s ease;}
+@keyframes softlyEnter {
+  from { opacity:0; transform:translateY(19px); }
+  to { opacity:1; transform:translateY(0); }
+}
+@keyframes envelopeFloat {
+  0%,100% {transform:translateY(0)}
+  50% {transform:translateY(-10px)}
+}
+@keyframes sealGlow {
+  from {box-shadow:0 4px 10px #23364870,0 0 0 0 #f7eacd22}
+  to {box-shadow:0 4px 13px #23364870,0 0 0 10px #f7eacd55}
+}
+@media (max-width: 720px) {
+  .opening {padding: 64px 18px 45px;}
+  .opening::before {inset: 12px;}
+  .opening::after {top: 15px;}
+  .opening h1 {font-size: 30px;}
+  .opening-instruction {margin: 19px 0;}
+  .envelope-button {max-width: 410px; padding-top: 24px;}
+}
+@media (max-height: 720px) and (min-width: 721px) {
+  .opening {padding: 35px 20px;}
+  .opening h1 em {font-size: 62px;margin: 6px 0 0;}
+  .opening-instruction {margin: 10px 0 12px;}
+  .envelope-button {width:min(350px,65vw);padding-top:12px;}
+}
+@media (prefers-reduced-motion: reduce) {
+  .opening *, .opening .envelope-button, .opening .envelope-button:not(:disabled),
+  .opening .envelope-button:not(:disabled) .wax-seal {animation: none !important;}
+}
